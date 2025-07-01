@@ -35,6 +35,10 @@ class Recette
     #[ORM\Column]
     private ?bool $isPublished = null;
 
+    #[ORM\ManyToOne(inversedBy: 'recipe')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Chef $chef = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +124,18 @@ class Recette
     public function setIsPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getChef(): ?Chef
+    {
+        return $this->chef;
+    }
+
+    public function setChef(?Chef $chef): static
+    {
+        $this->chef = $chef;
 
         return $this;
     }
