@@ -3,5 +3,10 @@
 @tailwind utilities;
 
 body {
-    background-color: skyblue;
+  background-color: rgb(227, 227, 227);
+}
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin: 3rem;
 }

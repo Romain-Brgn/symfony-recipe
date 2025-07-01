@@ -1,20 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}Toutes nos recettes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<section class="relative text-white py-24 px-6 overflow-hidden">
+  <!-- Image de fond -->
+  <div class="absolute inset-0 bg-cover bg-center opacity-30 blur-sm" 
+  style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
 
-<div class="example-wrapper">
-    <h1>Hello ✅</h1>
+  <!-- Contenu -->
+  <div class="relative z-10 max-w-4xl mx-auto text-center">
+    <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight drop-shadow-md">
+      Toutes nos recettes
+    </h1>
+    <p class="mt-4 text-lg sm:text-xl text-gray-200 drop-shadow-sm">
+      Des idées simples, savoureuses et de saison pour toutes vos envies.
+    </p>
+    <!-- Bouton facultatif -->
+    <!--
+    <a href="#recettes" class="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+      Voir les recettes
+    </a>
+    -->
+  </div>
+</section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/miam/Desktop/recipe_symfony/my_recipe/src/Controller/IndexController.php</code></li>
-        <li>Your template at <code>C:/Users/miam/Desktop/recipe_symfony/my_recipe/templates/index/index.html.twig</code></li>
-    </ul>
+
+<div class="container mx-auto px-4 mt-16">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 list-none">
+    {% for recette in recettes %}
+      <li class="h-full">
+        <div class="max-w-sm min-h-[420px] bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between">
+          <a href="#">
+            <img class="rounded-t-lg w-full object-cover h-48" src="{{ recette.image }}" alt="" />
+          </a>
+          <div class="p-5">
+            <div>
+              <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {{ recette.title|length > 50 ? recette.title|slice(0, 47) ~ '...' : recette.title }}
+                </h5>
+              </a>
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                {{ recette.description|length > 100 ? recette.description|slice(0, 97) ~ '...' : recette.description }}
+              </p>
+            </div>
+            <a href="{{ path('recette_detail', {'id': recette.id}) }}" class="inline-flex items-center px-3 py-2 mt-4 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Read more
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
+
+
+
+
+
+
 {% endblock %}

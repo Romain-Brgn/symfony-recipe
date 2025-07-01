@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ recette.title }}{% endblock %}
+
+{% block body %}
+  <div class="container mx-auto px-4 py-10">
+    <h1 class="text-4xl font-bold mb-4">{{ recette.title }}</h1>
+    <img src="{{ recette.image }}" alt="{{ recette.title }}" class="mb-6 w-full max-w-xl rounded shadow">
+    <p class="text-lg text-gray-800">{{ recette.description }}</p>
+  </div>
+{% endblock %}
