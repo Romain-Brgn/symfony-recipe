@@ -3,9 +3,40 @@
 {% block title %}{{ recette.title }}{% endblock %}
 
 {% block body %}
-  <div class="container mx-auto px-4 py-10">
-    <h1 class="text-4xl font-bold mb-4">{{ recette.title }}</h1>
-    <img src="{{ recette.image }}" alt="{{ recette.title }}" class="mb-6 w-full max-w-xl rounded shadow">
-    <p class="text-lg text-gray-800">{{ recette.description }}</p>
+<section class="container mx-auto px-4 py-12">
+  <div class="max-w-4xl mx-auto bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden">
+    
+    <!-- Image -->
+    <img class="w-full h-64 object-cover" src="{{ recette.image }}" alt="Image de {{ recette.title }}">
+
+    <!-- Contenu -->
+    <div class="p-8 space-y-6">
+      <div>
+        <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
+          {{ recette.title }}
+        </h1>
+        <p class="text-gray-600 dark:text-gray-300 text-lg">{{ recette.description }}</p>
+      </div>
+
+      <!-- Infos recette -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
+        <div class="flex items-center">
+          <span class="font-medium w-40">👨‍🍳 Chef :</span> {{ recette.chef.name }}
+        </div>
+        <div class="flex items-center">
+          <span class="font-medium w-40">👥 Pour :</span> {{ recette.nbPersonne }} personne{{ recette.nbPersonne > 1 ? 's' : '' }}
+        </div>
+        <div class="flex items-center">
+          <span class="font-medium w-40">⏱ Temps :</span>
+          {% set h = recette.tempsPreparation // 60 %}
+          {% set m = recette.tempsPreparation % 60 %}
+          {{ h > 0 ? h ~ 'h ' : '' }}{{ m > 0 ? m ~ 'min' : '' }}
+        </div>
+        <div class="flex items-center">
+          <span class="font-medium w-40">📅 Publiée le :</span> {{ recette.createdAt|date('d/m/Y') }}
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 {% endblock %}
